@@ -17,13 +17,17 @@ const Navbar = () => {
       title: "Chat",
       url: "/chat",
     },
+    {
+      title: "Blogs",
+      url: "/blog",
+    },
   ];
   return (
-    <nav className="sticky z-[100] h-14 inset-x-0 border-b border-gray-200 top-0 w-full backdrop-blur-lg transition-all ">
+    <nav className="sticky z-[100] bg-white h-14 inset-x-0 border-b border-gray-200 top-0 w-full backdrop-blur-lg transition-all ">
       <MaxWidthWrapper>
         <div className="flex h-14 items-center justify-between border-b border-zinc-200">
           <Link className="flex z-40 font-semibold" href={"/"}>
-            App <span className="text-green-500">Logo</span>
+            <span className="text-green-500">Renewable </span>xchange
           </Link>
           <div className="h-full flex items-center space-x-4">
             {navLinks.map((link) => (
