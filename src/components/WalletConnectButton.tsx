@@ -1,38 +1,22 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { useWeb3React } from '@web3-react/core';
-import { injected, walletconnect } from '../walletCollector';
-import { FaWallet, FaEthereum, FaQrcode } from 'react-icons/fa';
+import React, { useState } from "react";
+import { useWeb3React } from "@web3-react/core";
+import { injected, walletconnect } from "../walletCollector";
+import { FaWallet, FaEthereum, FaQrcode } from "react-icons/fa";
 import { BeaconWallet } from "@taquito/beacon-wallet";
 import { NetworkType } from "@airgap/beacon-types";
 import { TezosToolkit } from "@taquito/taquito";
 import { WalletProvider } from "@taquito/taquito";
 
-
 const WalletConnectButton: React.FC = () => {
   const { activate, account, deactivate } = useWeb3React();
   const [wallet, setWallet] = useState<BeaconWallet | null>(null);
   const [showDropdown, setShowDropdown] = useState(false);
-
+  const [address, setAddress] = useState<string>("");
+  const [balance, setBalance] = useState<string>("");
   const rpcUrl = "https://ghostnet.ecadinfra.com";
   const Tezos = new TezosToolkit(rpcUrl);
-
-  const connectWallet = async () => {
-    try {
-      const newWallet = new BeaconWallet({
-        name: "Simple NFT app tutorial",
-        preferredNetwork: NetworkType.GHOSTNET,
-      });
-      await newWallet.requestPermissions();
-      const address = await newWallet.getPKH();
-      const balanceMutez = await Tezos.tz.getBalance(address);
-      const balanceTez = (balanceMutez.toNumber() / 1000000).toFixed(2);
-      setWallet(newWallet);
-    } catch (error) {
-      console.error("Error connecting wallet:", error);
-    }
-  };
 
   const sendmoney = async () => {
     Tezos.setWalletProvider(wallet as unknown as WalletProvider);
@@ -51,6 +35,26 @@ const WalletConnectButton: React.FC = () => {
       );
   };
 
+  
+  const connectWallet = async () => {
+    try {
+      const newWallet = new BeaconWallet({
+        name: "Simple NFT app tutorial",
+        preferredNetwork: NetworkType.GHOSTNET,
+      });
+      await newWallet.requestPermissions();
+      const address = await newWallet.getPKH();
+      const balanceMutez = await Tezos.tz.getBalance(address);
+      const balanceTez = (balanceMutez.toNumber() / 1000000).toFixed(2);
+      setWallet(newWallet);
+      setAddress(address);
+      setBalance(balanceTez);
+    } catch (error) {
+      console.error("Error connecting wallet:", error);
+    }
+  };
+
+  
   const toggleDropdown = () => setShowDropdown(!showDropdown);
 
   return (
@@ -67,7 +71,9 @@ const WalletConnectButton: React.FC = () => {
         <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-20">
           {account ? (
             <div className="px-4 py-2">
-              <p className="text-gray-700">Connected: {account}</p>
+              <p className="text-gray-700">
+                Connected: {address}:{balance} Tez
+              </p>
               <button
                 onClick={() => deactivate()}
                 className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
@@ -83,7 +89,6 @@ const WalletConnectButton: React.FC = () => {
               >
                 <FaEthereum className="mr-2" /> Connect Wallet
               </button>
-              
             </>
           )}
         </div>
@@ -93,7 +98,6 @@ const WalletConnectButton: React.FC = () => {
 };
 
 export default WalletConnectButton;
-
 
 /**
  * 
