@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState } from 'react';
 import { useWeb3React } from '@web3-react/core';
 import { injected, walletconnect } from '../walletCollector';
@@ -25,8 +24,9 @@ const WalletConnectButton: React.FC = () => {
       <button
         onClick={toggleDropdown}
         className="p-2 bg-gray-100 rounded-full hover:bg-gray-200 focus:outline-none"
+        title="Wallet"
       >
-        <FaWallet className="w-6 h-6" />
+        <FaWallet className="w-4 h-5" />
       </button>
 
       {showDropdown && (

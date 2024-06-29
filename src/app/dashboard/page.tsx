@@ -15,30 +15,26 @@ FEATURES:
 import React from "react";
 import Map from "@/components/Map";
 import PlantList from "@/components/PlantList";
-import Graphs from "@/components/Graphs";
-import Chart from "@/components/Chart";
+import EnergyPrice from "@/components/EnergyPrice";
 
 export default function Dashboard() {
   return (
     <main className="flex flex-col gap-8 p-4">
-      {/* Heading */}
       <h1 className="text-2xl font-bold mb-4">Dashboard</h1>
-      {/* Map Section */}
+      <div>
+        <EnergyPrice />
+      </div>
       <div className="flex flex-col justify-center items-center gap-4">
         <div className="w-full max-w-4xl bg-white rounded-lg shadow-lg p-8 mb-8">
-          {/* Heading */}
           <h2 className="text-2xl font-bold mb-4">
             Map of Microgrids and Macrogrids in India
           </h2>
-          {/* Description */}
           <div className="flex text-sm text-gray-400">
             <p>This is realtime data from Google Maps*</p>
           </div>
-          {/* Displays a map */}
           <Map />
         </div>
       </div>
-      
       {/* Plant List */}
       <PlantList />
       
