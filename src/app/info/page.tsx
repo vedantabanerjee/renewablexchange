@@ -11,8 +11,10 @@ FUNCTIONS:
 import { useEffect, useState } from "react";
 import axios from "axios";
 import BlogCard from "@/components/BlogCard";
+import Graphs from "@/components/Graphs";
+import Chart from "@/components/Chart";
 
-const Blogs: React.FC = () => {
+const Info: React.FC = () => {
   // States to track blogs and loading statuses
   const [blogs, setBlogs] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -23,7 +25,7 @@ const Blogs: React.FC = () => {
         // Fetch blogs from the News API
         // !!!!!! V REMEMBER TO ADD THE API KEY FROM THE BOTTOM WHEN IN USE !!!!!!!
         const response = await axios.get(
-          `https://newsapi.org/v2/everything?q=renewable energy OR green energy OR sustainable energy&apiKey=2c8a3dec17ae4eeda3bed9d853740c52`
+          `https://newsapi.org/v2/everything?q=renewable energy OR green energy OR sustainable energy&apiKey=`
         );
 
         // Update the blogs state with the fetched data
@@ -48,6 +50,21 @@ const Blogs: React.FC = () => {
   return (
     <main className="flex flex-col items-center p-8 bg-gray-100 min-h-screen">
       <h1 className="text-4xl font-bold mb-8">
+      <span className="text-green-400">Green</span> Trends in India
+      </h1>
+      <div>
+      <div className="flex gap-4 mb-10">
+        <div className="w-6/6">
+          {/* Displays various graphs */}
+          <Graphs />
+        </div>
+        <div className="w-1/2">
+          {/* Displays a chart */}
+          <Chart />
+        </div>
+      </div>
+      </div>  
+      <h1 className="text-4xl font-bold mb-8">
         Blogs about Green Energy and Sustainability
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -68,6 +85,6 @@ const Blogs: React.FC = () => {
   );
 };
 
-export default Blogs;
+export default Info;
 
 //News api key: 2c8a3dec17ae4eeda3bed9d853740c52

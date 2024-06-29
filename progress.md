@@ -55,4 +55,7 @@ newsapi api key:
 2c8a3dec17ae4eeda3bed9d853740c52
 
 
-
+### TODO:
+- Info Page
+    - Bring in the graph component to info page
+    - Bring in the chart component to info page

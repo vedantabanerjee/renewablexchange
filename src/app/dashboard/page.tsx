@@ -23,19 +23,6 @@ export default function Dashboard() {
     <main className="flex flex-col gap-8 p-4">
       {/* Heading */}
       <h1 className="text-2xl font-bold mb-4">Dashboard</h1>
-      
-      {/* Graphs and Chart */}
-      <div className="flex gap-4">
-        <div className="w-1/2">
-          {/* Displays various graphs */}
-          <Graphs />
-        </div>
-        <div className="w-1/2">
-          {/* Displays a chart */}
-          <Chart />
-        </div>
-      </div>
-      
       {/* Map Section */}
       <div className="flex flex-col justify-center items-center gap-4">
         <div className="w-full max-w-4xl bg-white rounded-lg shadow-lg p-8 mb-8">

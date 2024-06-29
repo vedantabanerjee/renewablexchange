@@ -18,8 +18,8 @@ const Navbar = () => {
       url: "/chat",
     },
     {
-      title: "Blogs",
-      url: "/blog",
+      title: "Info",
+      url: "/info",
     },
   ];
   return (
