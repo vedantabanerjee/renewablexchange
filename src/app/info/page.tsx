@@ -25,7 +25,7 @@ const Info: React.FC = () => {
         // Fetch blogs from the News API
         // !!!!!! V REMEMBER TO ADD THE API KEY FROM THE BOTTOM WHEN IN USE !!!!!!!
         const response = await axios.get(
-          `https://newsapi.org/v2/everything?q=renewable energy OR green energy OR sustainable energy&apiKey=`
+          `https://newsapi.org/v2/everything?q=renewable energy OR green energy OR sustainable energy&apiKey=2c8a3dec17ae4eeda3bed9d853740c52`
         );
 
         // Update the blogs state with the fetched data

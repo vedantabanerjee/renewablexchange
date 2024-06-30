@@ -4,6 +4,10 @@ import React, { useState } from 'react';
 import { useWeb3React } from '@web3-react/core';
 import { injected, walletconnect } from '../walletCollector';
 import { FaWallet, FaEthereum, FaQrcode } from 'react-icons/fa';
+import { BeaconWallet } from "@taquito/beacon-wallet";
+import { NetworkType } from "@airgap/beacon-types";
+import { TezosToolkit } from "@taquito/taquito";
+import { WalletProvider } from "@taquito/taquito";
 
 
 const WalletConnectButton: React.FC = () => {
@@ -77,14 +81,9 @@ const WalletConnectButton: React.FC = () => {
                 onClick={() => connectWallet()}
                 className="flex items-center w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
               >
-                <FaEthereum className="mr-2" /> Connect MetaMask
+                <FaEthereum className="mr-2" /> Connect Wallet
               </button>
-              <button
-                onClick={() => sendmoney()}
-                className="flex items-center w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-              >
-                <FaQrcode className="mr-2" /> Send Tezos to address
-              </button>
+              
             </>
           )}
         </div>
@@ -94,3 +93,14 @@ const WalletConnectButton: React.FC = () => {
 };
 
 export default WalletConnectButton;
+
+
+/**
+ * 
+ * <button
+                onClick={() => sendmoney()}
+                className="flex items-center w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+              >
+                <FaQrcode className="mr-2" /> Send Tezos to address
+              </button>
+ */
