@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
-
+import React, { useState } from "react";
+import { TezosToolkit } from "@taquito/taquito";
+import { BeaconWallet } from "@taquito/beacon-wallet";
+import { NetworkType } from "@airgap/beacon-types";
+import { WalletProvider } from "@taquito/taquito";
 interface Microgrid {
   id: number;
   name: string;
@@ -16,13 +19,36 @@ interface MicrogridCardProps {
   energyPrice: number;
 }
 
-const MicrogridCard: React.FC<MicrogridCardProps> = ({ microgrid, energyPrice }) => {
+const rpcUrl = "https://ghostnet.ecadinfra.com";
+const Tezos = new TezosToolkit(rpcUrl);
+
+const MicrogridCard: React.FC<MicrogridCardProps> = ({
+  microgrid,
+  energyPrice,
+}) => {
   const [kwh, setKwh] = useState(0);
-  
-  const handleBuy = () => {
-    const totalCost = kwh * energyPrice;
-    // Implement the transaction logic here, for now we'll just log it
-    console.log(`Buying ${kwh} kWh for a total of $${totalCost.toFixed(2)}`);
+
+  const handleBuy = async (Amount: any) => {
+    const wallet = new BeaconWallet({
+      name: "Simple NFT app tutorial",
+      preferredNetwork: NetworkType.GHOSTNET,
+    });
+    await wallet.requestPermissions();
+    Tezos.setWalletProvider(wallet as unknown as WalletProvider);
+    const tezAmount = 10;
+    await Tezos.wallet
+      .transfer({
+        amount: tezAmount,
+        to: "tz1befzYnetjgpUe2aVBdoVqVDvFim2iTkya",
+      })
+      .send()
+      .then((op) => {
+        console.log(`Waiting for ${op.opHash} to be confirmed...`);
+        return op.confirmation(2).then(() => op.opHash);
+      })
+      .catch((error) =>
+        console.log(`Error: ${JSON.stringify(error, null, 2)}`)
+      );
   };
 
   return (
@@ -33,6 +59,7 @@ const MicrogridCard: React.FC<MicrogridCardProps> = ({ microgrid, energyPrice })
         <p>Stored: {microgrid.stored}</p>
         <p>Developer: {microgrid.developer}</p>
         <p>Type: {microgrid.type}</p>
+        <p>Price per kWh: {energyPrice} Tez</p>
       </div>
       <div className="flex items-center">
         <input
@@ -42,7 +69,10 @@ const MicrogridCard: React.FC<MicrogridCardProps> = ({ microgrid, energyPrice })
           className="border rounded p-2 mr-2"
           placeholder="kWh"
         />
-        <button onClick={handleBuy} className="bg-blue-500 text-white rounded p-2">
+        <button
+          onClick={() => handleBuy(kwh)}
+          className="bg-blue-500 text-white rounded p-2"
+        >
           Buy
         </button>
       </div>
