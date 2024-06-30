@@ -36,7 +36,7 @@ const Info: React.FC = () => {
         // Set loading status to false
         console.error("Error fetching blogs:", error);
         setLoading(false);
-      }
+      } 
     };
 
     // Calling the fetchBlogs function when the component mounts

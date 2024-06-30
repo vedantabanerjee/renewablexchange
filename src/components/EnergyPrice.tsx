@@ -55,9 +55,6 @@ const EnergyPrice: React.FC = () => {
     <div className="flex justify-center">
       <div className="flex justify-between w-3/6 bg-white rounded-lg shadow-lg p-8 mb-8">
         <h2 className=" text-3xl font-bold">Energy Price</h2>
-        <div className="flex justify-center  text-sm text-gray-400 mt-2">
-            <p>This is realtime data from Google Maps*</p>
-          </div>
         <p className="text-4xl font-bold text-green-500">₹{price.toFixed(2)}</p>
       </div>
     </div>

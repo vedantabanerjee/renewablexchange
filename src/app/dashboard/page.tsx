@@ -768,7 +768,7 @@ export default function Dashboard() {
           <h2 className="text-2xl font-bold mb-4">
             Map of Microgrids and Macrogrids in India
           </h2>
-          <div className="flex text-sm text-gray-400">
+          <div className="flex text-sm text-gray-400 pb-3">
             <p>This is realtime data from Google Maps*</p>
           </div>
           <Map />

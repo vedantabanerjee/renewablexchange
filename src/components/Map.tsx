@@ -767,7 +767,7 @@ const Map: React.FC = () => {
 
   return (
     // !!!!!!!! V WHEN YOU USE IT ENTER YOUR API KEY DAMMIT !!!!!!!!!
-    <LoadScript googleMapsApiKey="">
+    <LoadScript googleMapsApiKey="AIzaSyCA7dN3BksC6s0JFrOfpVD2DGnyv766kiw">
       <GoogleMap mapContainerStyle={mapContainerStyle} zoom={5} center={center}>
         {locations.map((location) => (
           <Marker
